@@ -59,6 +59,7 @@ func TestFindChanges(t *testing.T) {
 			map[string]any{"a": []any{1.2, nil}},
 			false,
 		},
+		{[]byte(`{}`), []byte(`{"a":1}`), map[string]any{"a": 1.0}, false},
 	}
 
 	for ix, tc := range cases {
