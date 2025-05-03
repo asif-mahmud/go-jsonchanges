@@ -29,6 +29,8 @@ func TestFindChanges(t *testing.T) {
 		{[]byte(`1.4`), []byte(`1.2`), 1.2, false},
 
 		{[]byte(`[]`), []byte(`[]`), nil, false},
+		{[]byte(`[]`), nil, []any{}, false},
+		{nil, []byte(`[]`), []any{}, false},
 		{[]byte(`[1,2]`), []byte(`[]`), []any{1.0, 2.0}, false},
 		{[]byte(`[1,2]`), []byte(`[1,2]`), nil, false},
 		{[]byte(`[1,2]`), []byte(`[1]`), []any{nil, 2.0}, false},
@@ -38,6 +40,8 @@ func TestFindChanges(t *testing.T) {
 		{[]byte(`[1,2]`), []byte(`[1.2,true]`), []any{1.2, true}, false},
 
 		{[]byte(`{}`), []byte(`{}`), nil, false},
+		{[]byte(`{}`), nil, map[string]any{}, false},
+		{nil, []byte(`{}`), map[string]any{}, false},
 		{[]byte(`{"a":1}`), []byte(`{}`), map[string]any{"a": 1.0}, false},
 		{[]byte(`{"a":1}`), []byte(`{"a":1}`), nil, false},
 		{[]byte(`{"a":1}`), []byte(`{"a":null}`), map[string]any{"a": 1.0}, false},
